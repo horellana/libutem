@@ -1,5 +1,14 @@
 import requests
 
+def requiere_login(metodo):
+    def f(*args, **kwargs):
+        that = args[0]
+        if not that.logueado:
+            raise Exception('No has iniciado sesion')
+        if not that.cookies:
+            raise Exception('No hay cookies... no puedo continuar')
+        return metodo(args, kwargs)
+    return f
 
 class ErrorLogin(Exception):
     def __init__(self, response, rut, contrasena):
@@ -30,11 +39,7 @@ class Cliente:
             self.cookies = r.cookies
             self.ultima_respuesta = r
 
+    @requiere_login
     def obtener_notas(self):
-        if not self.logueado:
-            raise Exception('No haz iniciado sesion')
-        if not self.cookies:
-            raise Exception('No hay cookies... no puedo continuar')
-
         url = 'mi.utem.cl/academia/mis_notas'
         r = requests.get(url, cookies=self.cookies)
