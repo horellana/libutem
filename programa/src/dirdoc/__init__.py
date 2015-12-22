@@ -29,3 +29,12 @@ class Cliente:
             self.logueado = True
             self.cookies = r.cookies
             self.ultima_respuesta = r
+
+    def obtener_notas(self):
+        if not self.logueado:
+            raise Exception('No haz iniciado sesion')
+        if not self.cookies:
+            raise Exception('No hay cookies... no puedo continuar')
+
+        url = 'mi.utem.cl/academia/mis_notas'
+        r = requests.get(url, cookies=self.cookies)
