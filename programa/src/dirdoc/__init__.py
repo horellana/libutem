@@ -65,9 +65,9 @@ class Cliente:
             self.ultima_respuesta = r
 
     @requiere_login
-    def obtener_notas(self):
         url = 'http://mi.utem.cl/academia/mis_notas'
         r = self.session.get(url)
+    def notas(self):
 
         if not r.status_code == request.codes.ok:
             r.raise_for_status()
