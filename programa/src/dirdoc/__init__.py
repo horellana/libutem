@@ -30,16 +30,6 @@ def requiere_login(metodo):
     return f
 
 
-class ErrorLogin(Exception):
-    def __init__(self, response, rut, contrasena):
-        error = 'Ocurrio un error al ingresar, verifica usuario y contraseña.'
-        info = 'rut: {}, contraseña: {}, url: {}'.format(rut,
-                                                         contrasena,
-                                                         response.url)
-        Exception.__init__(self, '{}\nInformacion Adicional: {}'.format(error,
-                                                                        info))
-
-
 class Cliente:
     """
     Esta clase representa a un cliente HTTP para el sistema DIRDOC.
@@ -51,28 +41,38 @@ class Cliente:
             'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'
         })
 
-    def login(self, rut, contrasena):
-        r = self.session.post('http://mi.utem.cl/login',
-                              data={'rut_alumno': rut, 'contrasena': contrasena})
+    def __peticion(self, url, url_destino, data=None):
+        """
+        Este metodo realiza una peticion HTTP (GET o POST segun corresponda).
+        Tira un error si es que el servidor no retorna 200 o si no nos encontramos
+        en la `url_destino.`
+        """
+        if data:
+            metodo = lambda: self.session.post(url, data=data)
+        else:
+            metodo = lambda: self.session.get(url)
 
+        r = metodo()
 
         if not r.status_code == requests.codes.ok:
             r.raise_for_status()
-        elif not r.url == 'http://mi.utem.cl/inicio':
-            raise ErrorLogin(r, rut, contrasena)
+        elif not r.url == url_destino:
+            raise Exception('Error al cargar url: <{}>'.format(url))
         else:
-            self.logueado = True
-            self.ultima_respuesta = r
+            return r
+
+    def login(self, rut, contrasena):
+        self.__peticion(url='http://mi.utem.cl/login',
+                        url_destino='http://mi.utem.cl/inicio',
+                        data={'rut_alumno': rut, 'contrasena': contrasena})
+        self.logueado = True
 
     @requiere_login
-        url = 'http://mi.utem.cl/academia/mis_notas'
-        r = self.session.get(url)
     def notas(self):
+        respuesta = self.__peticion(url='http://mi.utem.cl/academia/mis_notas',
+                                    url_destino='http://mi.utem.cl/academia/mis_notas')
+        return extraer_notas(respuesta.text())
 
-        if not r.status_code == request.codes.ok:
-            r.raise_for_status()
-        elif not r.url == 'http://mi.utem.cl/academia/mis_notas':
-            raise Exception('Ocurrio un error al obtener las notas')
-        else:
-            notas = extraer_notas(r.html())
-            return notas
+    @requiere_login
+    def malla(self):
+        pass
