@@ -42,5 +42,13 @@ class Cliente:
 
     @requiere_login
     def obtener_notas(self):
-        url = 'mi.utem.cl/academia/mis_notas'
-        r = requests.get(url, cookies=self.cookies)
+        url = 'http://mi.utem.cl/academia/mis_notas'
+        r = self.session.get(url)
+
+        if not r.status_code == request.codes.ok:
+            r.raise_for_status()
+        elif not r.url == 'http://mi.utem.cl/academia/mis_notas':
+            raise Exception('Ocurrio un error al obtener las notas')
+        else:
+            notas = extraer_notas(r.html())
+            return notas
