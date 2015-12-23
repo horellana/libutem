@@ -2,13 +2,14 @@ import requests
 
 def requiere_login(metodo):
     def f(*args, **kwargs):
-        that = args[0]
-        if not that.logueado:
+        cliente = args[0]
+        if not cliente.logueado:
             raise Exception('No has iniciado sesion')
-        if not that.cookies:
+        if not cliente.session.cookies:
             raise Exception('No hay cookies... no puedo continuar')
-        return metodo(args, kwargs)
+        return metodo(*args, **kwargs)
     return f
+
 
 class ErrorLogin(Exception):
     def __init__(self, response, rut, contrasena):
