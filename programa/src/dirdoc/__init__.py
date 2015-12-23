@@ -1,6 +1,25 @@
+"""
+Modulo dirdoc.
+"""
+
 import requests
+from pyquery import PyQuery as pq
+
+
+def extraer_notas(html):
+    """
+    Recibe el texto html de la pagina que contiene las notas del alumno.
+    Retorna un diccionarion con la siguiente estructura:
+    {'nombre_asignatura': [lista_de_notas]}.
+    """
+    pass
+
 
 def requiere_login(metodo):
+    """
+    Decorador que se encarga de verificar que el cliente a iniciado sesion antes de
+    ejecutar `metodo`.
+    """
     def f(*args, **kwargs):
         cliente = args[0]
         if not cliente.logueado:
@@ -14,15 +33,19 @@ def requiere_login(metodo):
 class ErrorLogin(Exception):
     def __init__(self, response, rut, contrasena):
         error = 'Ocurrio un error al ingresar, verifica usuario y contraseña.'
-        info = 'rut: {}, contraseña: {}, url: {}'.format(rut, contrasena, response.url)
-        Exception.__init__(self, '{}\nInformacion Adicional: {}'
-                           .format(error, info))
+        info = 'rut: {}, contraseña: {}, url: {}'.format(rut,
+                                                         contrasena,
+                                                         response.url)
+        Exception.__init__(self, '{}\nInformacion Adicional: {}'.format(error,
+                                                                        info))
+
 
 class Cliente:
+    """
+    Esta clase representa a un cliente HTTP para el sistema DIRDOC.
+    """
     def __init__(self):
-        self.cookies = {}
         self.logueado = False
-        self.ultima_respuesta = {}
         self.session = requests.Session()
         self.session.headers.update({
             'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'
