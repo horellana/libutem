@@ -9,10 +9,19 @@ from pyquery import PyQuery as pq
 def extraer_notas(html):
     """
     Recibe el texto html de la pagina que contiene las notas del alumno.
-    Retorna un diccionarion con la siguiente estructura:
+    Retorna una lista de diccionarios con la siguiente estructura:
     {'nombre_asignatura': [lista_de_notas]}.
     """
-    pass
+    d = pq(html)
+
+    ramos = d('col-xs-10')
+
+    for i in enumerate(ramos):
+        nombre = d('div > h5 > span')[i]
+        notas = [nota.text
+                 for nota
+                 in d('#sample-table-1')[i].find('tbody').find('tr').find('td')]
+        return notas
 
 
 def requiere_login(metodo):
