@@ -2,7 +2,7 @@
 Modulo dirdoc.html
 """
 
-from pyquery import Pyquery as pq
+from pyquery import PyQuery as pq
 
 def extraer_notas(html):
     """
@@ -12,12 +12,12 @@ def extraer_notas(html):
     """
     d = pq(html)
 
-    ramos = d('col-xs-10')
+    ramos = d('.col-xs-10')
 
     for i, _ in enumerate(ramos):
-        nombre = d('div > h5 > span')[i]
+        nombre = d('div > h5 > span')[i].text
         notas = [nota.text
                  for nota
                  in d('#sample-table-1')[i].find('tbody').find('tr').findall('td')
-                 if nota.text != '']
+                 if nota is not None]
         yield {nombre: notas}

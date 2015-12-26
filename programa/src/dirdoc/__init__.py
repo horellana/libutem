@@ -3,7 +3,6 @@ Modulo dirdoc.
 """
 
 import requests
-
 import dirdoc.html
 
 def requiere_login(metodo):
@@ -62,7 +61,8 @@ class Cliente:
     def notas(self):
         respuesta = self.__peticion(url='http://mi.utem.cl/academia/mis_notas',
                                     url_destino='http://mi.utem.cl/academia/mis_notas')
-        return dirdoc.html.extraer_notas(respuesta.text())
+        html = respuesta.text()
+        return dirdoc.html.extraer_notas(html)
 
     @requiere_login
     def malla(self):
