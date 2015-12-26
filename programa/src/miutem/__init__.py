@@ -3,7 +3,7 @@ Modulo dirdoc.
 """
 
 import requests
-import dirdoc.html
+import miutem.html
 
 def requiere_login(metodo):
     """
@@ -42,10 +42,10 @@ class Cliente:
         else:
             metodo_http = lambda: self.session.get(url)
 
-        r = metodo_http()
-
-        if not url_destino:
+        if url_destino is None:
             url_destino = url
+
+        r = metodo_http()
 
         if not r.status_code == requests.codes.ok:
             r.raise_for_status()
