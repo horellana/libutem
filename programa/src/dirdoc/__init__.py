@@ -31,18 +31,21 @@ class Cliente:
             'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'
         })
 
-    def __peticion(self, url, url_destino, data=None):
+    def __peticion(self, url, url_destino=None, data=None):
         """
         Este metodo realiza una peticion HTTP (GET o POST segun corresponda).
         Tira un error si es que el servidor no retorna 200 o si no nos encontramos
         en la `url_destino.`
         """
         if data:
-            metodo = lambda: self.session.post(url, data=data)
+            metodo_http = lambda: self.session.post(url, data=data)
         else:
-            metodo = lambda: self.session.get(url)
+            metodo_http = lambda: self.session.get(url)
 
-        r = metodo()
+        r = metodo_http()
+
+        if not url_destino:
+            url_destino = url
 
         if not r.status_code == requests.codes.ok:
             r.raise_for_status()
@@ -59,11 +62,5 @@ class Cliente:
 
     @requiere_login
     def notas(self):
-        respuesta = self.__peticion(url='http://mi.utem.cl/academia/mis_notas',
-                                    url_destino='http://mi.utem.cl/academia/mis_notas')
-        html = respuesta.text()
-        return dirdoc.html.extraer_notas(html)
-
-    @requiere_login
-    def malla(self):
-        pass
+        respuesta = self.__peticion('http://mi.utem.cl/academia/mis_notas')
+        return dirdoc.html.extraer_notas(respuesta.text)

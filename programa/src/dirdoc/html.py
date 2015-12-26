@@ -8,7 +8,7 @@ def extraer_notas(html):
     """
     Recibe el texto html de la pagina que contiene las notas del alumno.
     Retorna una lista de diccionarios con la siguiente estructura:
-    {'nombre_asignatura': [lista_de_notas]}.
+    {'nombre_ramo': [lista_de_notas]}.
     """
     d = pq(html)
 
@@ -22,3 +22,10 @@ def extraer_notas(html):
                  if nota.text is not None]
         yield {nombre_ramo: notas}
 
+
+def extraer_malla(html):
+    """
+    Recibe el texto html de la pagina que contiene la malla de la carrera del alumno
+    retorna una estructura que contiene toda la informacion necesaria correspondiente a la malla,
+    """
+    pass
