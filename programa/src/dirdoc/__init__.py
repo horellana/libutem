@@ -16,12 +16,12 @@ def extraer_notas(html):
 
     ramos = d('col-xs-10')
 
-    for i in enumerate(ramos):
+    for i, _ in enumerate(ramos):
         nombre = d('div > h5 > span')[i]
         notas = [nota.text
                  for nota
-                 in d('#sample-table-1')[i].find('tbody').find('tr').find('td')]
-        return notas
+                 in d('#sample-table-1')[i].find('tbody').find('tr').findall('td')]
+        yield {nombre: notas}
 
 
 def requiere_login(metodo):
