@@ -25,7 +25,11 @@ def extraer_notas(html):
         nombre_ramo = info['nombre']
         codigo_ramo = info['codigo']
         seccion = info['seccion']
-        notas = [nota.text
+        ### El ''.join(split(...)) es para eliminar los espacios en blanco
+        ### ejemplos:
+        ### '5.0 ' => '5.0'
+        ### '    RAMO APROBADO' => 'RAMO APROBADO'
+        notas = [' '.join(nota.text.split())
                  for nota
                  in tabla_notas[i].find('tbody').find('tr').findall('td')
                  if nota.text is not None]
