@@ -1,5 +1,5 @@
 """
-Modulo dirdoc.
+Modulo miutem
 """
 
 import requests
@@ -63,4 +63,4 @@ class Cliente:
     @requiere_login
     def notas(self):
         respuesta = self.__peticion('http://mi.utem.cl/academia/mis_notas')
-        return dirdoc.html.extraer_notas(respuesta.text)
+        return miutem.html.extraer_notas(respuesta.text)
