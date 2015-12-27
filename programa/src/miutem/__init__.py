@@ -27,6 +27,13 @@ class FaltaLogin(Exception):
         return '{}'.format(self.informacion)
 
 
+class ErrorLogin(Exception):
+    def __init__(self, informacion):
+        self.informacion = informacion
+    def __str__(self):
+        return 'Revisa tu rut y contraseña. Informacion={}'.format(self.informacion)
+
+
 class Cliente:
     """
     Esta clase representa a un cliente HTTP para el sistema miutem.
@@ -57,7 +64,8 @@ class Cliente:
         if not r.status_code == requests.codes.ok:
             r.raise_for_status()
         elif not r.url == url_destino:
-            raise Exception('Error al cargar url: <{}>'.format(url))
+            raise ErrorLogin('Error al cargar url: <{}>. Estoy en <{}>'.format(url,
+                                                                             r.url))
         else:
             return r
 
