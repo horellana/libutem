@@ -13,12 +13,14 @@ def extraer_notas(html):
     d = pq(html)
 
     ramos = d('.col-xs-10')
+    nombres = d('div > h5 > span')
+    tabla_notas = d('#sample-table-1')
 
     for i, _ in enumerate(ramos):
-        nombre_ramo = d('div > h5 > span')[i].text
+        nombre_ramo = nombres[i].text
         notas = [nota.text
                  for nota
-                 in d('#sample-table-1')[i].find('tbody').find('tr').findall('td')
+                 in tabla_notas[i].find('tbody').find('tr').findall('td')
                  if nota.text is not None]
         yield {nombre_ramo: notas}
 
