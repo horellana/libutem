@@ -1,9 +1,17 @@
 import pytest
+import miutem
 import miutem.html
 
 
+def test_cliente_notas():
+    cliente = miutem.Cliente()
+
+    with pytest.raises(miutem.FaltaLogin):
+        cliente.notas()
+
+
 def test_extraer_informacion_ramo_uno():
-    texto =  'Curso: INDC8060 - SISTEMAS ECONÓMICOS (411)'
+    texto = 'Curso: INDC8060 - SISTEMAS ECONÓMICOS (411)'
     esperado = {'codigo': 'INDC8060',
                 'nombre': 'SISTEMAS ECONÓMICOS',
                 'seccion': '411'}
@@ -13,6 +21,7 @@ def test_extraer_informacion_ramo_uno():
     assert obtenido['codigo'] == esperado['codigo']
     assert obtenido['nombre'] == esperado['nombre']
     assert obtenido['seccion'] == esperado['seccion']
+
 
 def test_extraer_informacion_ramo_dos():
     texto = 'Curso: FISC8040 - ELECTROMAGNETISMO (103)'

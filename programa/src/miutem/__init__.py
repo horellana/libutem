@@ -13,11 +13,18 @@ def requiere_login(metodo):
     def f(*args, **kwargs):
         cliente = args[0]
         if not cliente.logueado:
-            raise Exception('No has iniciado sesion')
+            raise FaltaLogin('No has iniciado sesion')
         if not cliente.session.cookies:
-            raise Exception('No hay cookies... no puedo continuar')
+            raise FaltaLogin('No hay cookies... no puedo continuar')
         return metodo(*args, **kwargs)
     return f
+
+
+class FaltaLogin(Exception):
+    def __init__(self, informacion):
+        self.informacion = informacion
+    def __str__(self):
+        return '{}'.format(self.informacion)
 
 
 class Cliente:
