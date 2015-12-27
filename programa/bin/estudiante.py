@@ -7,8 +7,11 @@ import miutem
 
 def main(args):
     if not (args.rut and args.contraseña):
-        stderr.write('Necesito un rut y una contraseña\n')
-        return -1
+        if args.rut:
+            args.contraseña = args.rut
+        else:
+            stderr.write('Necesito un rut y una contraseña\n')
+            return -1
 
     cliente = miutem.Cliente()
     cliente.login(args.rut, args.contraseña)
@@ -26,7 +29,8 @@ if __name__ == '__main__':
         description='Obtiene informacion relacionada a un estudiante'
     )
     parser.add_argument('rut')
-    parser.add_argument('contraseña')
+    parser.add_argument('-c', '--contraseña',
+                        help='Por defecto es la misma que el rut')
     parser.add_argument('--notas',
                         action='store_true')
 
