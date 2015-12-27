@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='comprobar-estudiante',
-    version='0.1.3',
+    version='0.1.7',
     author='Hector Orellana',
     author_email='hofm92@gmail.com',
     url='https://github.com/juiko/comprobar-estudiante',
