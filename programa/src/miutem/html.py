@@ -25,26 +25,13 @@ def extraer_notas(html):
         nombre_ramo = info['nombre']
         codigo_ramo = info['codigo']
         seccion = info['seccion']
-        ### El ''.join(split(...)) es para eliminar los espacios en blanco
-        ### ejemplos:
-        ### '5.0 ' => '5.0'
-        ### '    RAMO APROBADO' => 'RAMO APROBADO'
-        notas = [' '.join(nota.text.split())
-                 for nota
-                 in tabla_notas[i].find('tbody').find('tr').findall('td')
-                 if nota.text is not None]
+        notas = extraer_informacion_notas(tabla_notas[i])
+
         yield {'ramo': nombre_ramo,
                'notas': notas,
                'codigo_ramo': codigo_ramo,
                'seccion': seccion}
 
-
-def extraer_malla(html):
-    """
-    Recibe el texto html de la pagina que contiene la malla de la carrera del alumno
-    retorna una estructura que contiene toda la informacion necesaria correspondiente a la malla,
-    """
-    pass
 
 def extraer_informacion_ramo(texto):
     """
@@ -64,3 +51,24 @@ def extraer_informacion_ramo(texto):
         return {'codigo': codigo,
                 'nombre': nombre,
                 'seccion': seccion}
+
+
+def extraer_informacion_notas(etree):
+    """
+    Funcion de ayuda para miutem.html.extraer_notas.
+    Recibe como argumento un HtmlElement (lxml) que contiene las notas de un alumno,
+    (notas parciales, promedio final, aprobado o reprobado)
+    Retorna un diccionario con esta informacion
+    """
+    informacion = [' '.join(nota.text.split())
+                   for nota
+                   in etree.find('tbody').find('tr').findall('td')
+                   if nota.text is not None]
+
+    notas = informacion[:len(informacion) - 2]
+    aprobado = informacion[-1]
+    promedio = informacion[-2]
+
+    return {'notas_parciales': [float(nota) for nota in notas],
+            'promedio_final': float(promedio),
+            'aprobado': aprobado}
