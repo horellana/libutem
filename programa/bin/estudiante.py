@@ -22,10 +22,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Obtiene informacion relacionada a un estudiante'
     )
-    parser.add_argument('--rut')
-    parser.add_argument('--contraseña')
+    parser.add_argument('rut')
+    parser.add_argument('contraseña')
     parser.add_argument('--notas',
-                        default=False)
+                        action='store_true')
 
     args = parser.parse_args()
 
