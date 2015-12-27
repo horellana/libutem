@@ -15,7 +15,8 @@ def main(args):
 
     if args.notas:
         notas = json.dumps(list(cliente.notas()),
-                           indent=4)
+                           indent=4,
+                           ensure_ascii=False)
         print(notas)
 
     return 0
