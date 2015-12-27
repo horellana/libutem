@@ -1,3 +1,4 @@
+import json
 import argparse
 from sys import stderr, exit
 
@@ -13,7 +14,8 @@ def main(args):
     cliente.login(args.rut, args.contraseña)
 
     if args.notas:
-        notas = list(cliente.notas())
+        notas = json.dumps(list(cliente.notas()),
+                           indent=4)
         print(notas)
 
     return 0
