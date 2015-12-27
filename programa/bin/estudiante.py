@@ -1,12 +1,12 @@
-import sys
 import argparse
+from sys import stderr, exit
 
 import miutem
 
 
 def main(args):
     if not (args.rut and args.contraseña):
-        sys.stderr.write('Necesito un rut y una contraseña\n')
+        stderr.write('Necesito un rut y una contraseña\n')
         return -1
 
     cliente = miutem.Cliente()
@@ -14,7 +14,7 @@ def main(args):
 
     if args.notas:
         notas = list(cliente.notas())
-        sys.stdout.write(notas)
+        print(notas)
 
     return 0
 
@@ -24,8 +24,9 @@ if __name__ == '__main__':
     )
     parser.add_argument('--rut')
     parser.add_argument('--contraseña')
-    parser.add_argument('--notas')
+    parser.add_argument('--notas',
+                        default=False)
 
     args = parser.parse_args()
 
-    sys.exit(main(args))
+    exit(main(args))
