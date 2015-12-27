@@ -31,8 +31,19 @@ class ErrorLogin(Exception):
     def __init__(self, informacion):
         self.informacion = informacion
     def __str__(self):
-        return 'Revisa tu rut y contraseña. Informacion={}'.format(self.informacion)
+        return 'Revisa tu rut y contraseña. Informacion={}'.format(
+            self.informacion
+        )
 
+class ErrorPeticion(Exception):
+    def __init__(self, url_destino, url_actual, informacion):
+        self.informacion = informacion
+    def __str__(self):
+        return 'Error al cargar {}. Llegue a {}. Informacion extra: {}'.format(
+            url_destino,
+            url_actual,
+            informacion
+        )
 
 class Cliente:
     """
@@ -64,16 +75,18 @@ class Cliente:
         if not r.status_code == requests.codes.ok:
             r.raise_for_status()
         elif not r.url == url_destino:
-            raise ErrorLogin('Error al cargar url: <{}>. Estoy en <{}>'.format(url,
-                                                                             r.url))
+            raise ErrorPeticion(url_destino, url_actual, r.status_code)
         else:
             return r
 
     def login(self, rut, contrasena):
-        self.__peticion(url='http://mi.utem.cl/login',
-                        url_destino='http://mi.utem.cl/inicio',
-                        data={'rut_alumno': rut, 'contrasena': contrasena})
-        self.logueado = True
+        try:
+            self.__peticion(url='http://mi.utem.cl/login',
+                            url_destino='http://mi.utem.cl/inicio',
+                            data={'rut_alumno': rut, 'contrasena': contrasena})
+            self.logueado = True
+        except ErrorPeticion as err:
+            raise ErrorLogin(err)
 
     @requiere_login
     def notas(self):
