@@ -22,7 +22,7 @@ def requiere_login(metodo):
 
 class Cliente:
     """
-    Esta clase representa a un cliente HTTP para el sistema DIRDOC.
+    Esta clase representa a un cliente HTTP para el sistema miutem.
     """
     def __init__(self):
         self.logueado = False
