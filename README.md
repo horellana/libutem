@@ -24,15 +24,16 @@ Como utilizar
 ------------------
 
 ```
- estudiante.py [-h] [--notas] rut contraseña
+usage: estudiante.py [-h] [--contraseña CONTRASEÑA] [--notas] rut
 
 Obtiene informacion relacionada a un estudiante
 
 positional arguments:
   rut
-  contraseña
 
 optional arguments:
-  -h, --help  show this help message and exit
+  -h, --help            show this help message and exit
+  --contraseña CONTRASEÑA
+			Por defecto es la misma que el rut
   --notas
 ```
