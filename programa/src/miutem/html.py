@@ -8,6 +8,7 @@ desde las secciones de miutem.cl
 import re
 from pyquery import PyQuery as pq
 
+
 def extraer_notas(html):
     """
     Recibe el texto html de la pagina que contiene las notas del alumno.
@@ -56,7 +57,8 @@ def extraer_informacion_ramo(texto):
 def extraer_informacion_notas(etree):
     """
     Funcion de ayuda para miutem.html.extraer_notas.
-    Recibe como argumento un HtmlElement (lxml) que contiene las notas de un alumno,
+    Recibe como argumento un HtmlElement (lxml) que contiene
+    las notas de un alumno,
     (notas parciales, promedio final, aprobado o reprobado)
     Retorna un diccionario con esta informacion
     """

@@ -8,7 +8,8 @@ import miutem.html
 
 def requiere_login(metodo):
     """
-    Decorador que se encarga de verificar que el cliente a iniciado sesion antes de
+    Decorador que se encarga de verificar que el cliente
+    a iniciado sesion antes de
     ejecutar `metodo`.
     """
     def f(*args, **kwargs):
@@ -24,6 +25,7 @@ def requiere_login(metodo):
 class FaltaLogin(Exception):
     def __init__(self, informacion):
         self.informacion = informacion
+
     def __str__(self):
         return '{}'.format(self.informacion)
 
@@ -31,22 +33,26 @@ class FaltaLogin(Exception):
 class ErrorLogin(Exception):
     def __init__(self, informacion):
         self.informacion = informacion
+
     def __str__(self):
         return 'Revisa tu rut y contraseña. Informacion={}'.format(
             self.informacion
         )
+
 
 class ErrorPeticion(Exception):
     def __init__(self, url_destino, url_actual, informacion):
         self.url_destino = url_destino
         self.url_actual = url_actual
         self.informacion = informacion
+
     def __str__(self):
         return 'Error al cargar {}. Llegue a {}. Informacion extra: {}'.format(
             self.url_destino,
             self.url_actual,
             self.informacion
         )
+
 
 class Cliente:
     """
@@ -62,8 +68,8 @@ class Cliente:
     def __peticion(self, url, url_destino=None, data=None):
         """
         Este metodo realiza una peticion HTTP (GET o POST segun corresponda).
-        Tira un error si es que el servidor no retorna 200 o si no nos encontramos
-        en la `url_destino.`
+        Tira un error si es que el servidor no retorna 200 o si no nos
+        encontramos en la `url_destino`.
         """
         if data:
             metodo_http = lambda: self.session.post(url, data=data)
