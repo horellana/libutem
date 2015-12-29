@@ -5,6 +5,7 @@ Modulo miutem
 import requests
 import miutem.html
 
+
 def requiere_login(metodo):
     """
     Decorador que se encarga de verificar que el cliente a iniciado sesion antes de
@@ -77,7 +78,7 @@ class Cliente:
         if not r.status_code == requests.codes.ok:
             r.raise_for_status()
         elif not r.url == url_destino:
-            raise ErrorPeticion(url_destino, url_actual, r.status_code)
+            raise ErrorPeticion(url_destino, r.url, r.status_code)
         else:
             return r
 
