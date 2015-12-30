@@ -4,43 +4,15 @@ Modulo miutem
 
 import requests
 
-import utem.miutem.html
-from utem.utilidades import *
+import utem
+from utem.miutem import html
+from utem.errores import ErrorPeticion
+from utem.utilidades import requiere_login
 
-class Cliente:
+class Cliente(utem.Cliente):
     """
     Esta clase representa a un cliente HTTP para el sistema miutem.
     """
-    def __init__(self):
-        self.logueado = False
-        self.session = requests.Session()
-        self.session.headers.update({
-            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'
-        })
-
-    def __peticion(self, url, url_destino=None, data=None):
-        """
-        Este metodo realiza una peticion HTTP (GET o POST segun corresponda).
-        Tira un error si es que el servidor no retorna 200 o si no nos
-        encontramos en la `url_destino`.
-        """
-        if data:
-            metodo_http = lambda: self.session.post(url, data=data)
-        else:
-            metodo_http = lambda: self.session.get(url)
-
-        if url_destino is None:
-            url_destino = url
-
-        r = metodo_http()
-
-        if not r.status_code == requests.codes.ok:
-            r.raise_for_status()
-        elif not r.url == url_destino:
-            raise ErrorPeticion(url_destino, r.url, r.status_code)
-        else:
-            return r
-
     def login(self, rut, contrasena):
         try:
             self.__peticion(url='http://mi.utem.cl/login',
@@ -53,4 +25,4 @@ class Cliente:
     @requiere_login
     def notas(self):
         respuesta = self.__peticion('http://mi.utem.cl/academia/mis_notas')
-        return miutem.html.extraer_notas(respuesta.text)
+        return html.extraer_notas(respuesta.text)
