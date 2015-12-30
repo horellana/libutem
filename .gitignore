@@ -1,5 +1,5 @@
+*.pyc
 programa/env/*
-programa/*.pyc
 /tests/.cache/v/cache/lastfailed
 programa/build/*
 programa/dist/*

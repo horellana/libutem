@@ -2,7 +2,7 @@ import json
 import argparse
 from sys import stderr, exit
 
-import miutem
+import utem.miutem as miutem
 
 
 def main(args):
@@ -24,7 +24,8 @@ def main(args):
 
     return 0
 
-if __name__ == '__main__':
+
+def leer_argumentos():
     parser = argparse.ArgumentParser(
         description='Obtiene informacion relacionada a un estudiante'
     )
@@ -34,6 +35,8 @@ if __name__ == '__main__':
     parser.add_argument('--notas',
                         action='store_true')
 
-    args = parser.parse_args()
+    return parser.parse_args()
 
-    exit(main(args))
+
+if __name__ == '__main__':
+    exit(main(leer_argumentos()))
