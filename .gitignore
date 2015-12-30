@@ -1,9 +1,5 @@
 *.pyc
-programa/env/*
+build/
+dist/
+env/
 /tests/.cache/v/cache/lastfailed
-programa/build/*
-programa/dist/*
-/programa/.cache/*
-/programa/tests/__pycache__/*
-/programa/src/miutem/__pycache__/*
-*egg*
