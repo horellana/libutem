@@ -3,6 +3,7 @@ import argparse
 from sys import stderr, exit
 
 import utem.miutem as miutem
+import utem.dirdoc as dirdoc
 
 
 def main(args):
@@ -13,7 +14,12 @@ def main(args):
             stderr.write('Necesito un rut y una contraseña\n')
             return -1
 
-    cliente = miutem.Cliente()
+    if args.dirdoc:
+        cliente = dirdoc.Cliente()
+
+    else:
+        cliente = miutem.Cliente()
+
     cliente.login(args.rut, args.contraseña)
 
     if args.notas:
@@ -34,6 +40,12 @@ def leer_argumentos():
                         help='Por defecto es la misma que el rut')
     parser.add_argument('--notas',
                         action='store_true')
+    parser.add_argument('--miutem',
+                        action='store_true',
+                        help='sacar informacion desde miutem')
+    parser.add_argument('--dirdoc',
+                        action='store_true',
+                        help='sacar informacion desde dirdoc')
 
     return parser.parse_args()
 

@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='libutem',
-    version='0.1.9',
+    version='0.1.10',
     author='Hector Orellana',
     author_email='hofm92@gmail.com',
     url='https://github.com/juiko/libutem',
