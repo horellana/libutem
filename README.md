@@ -12,8 +12,8 @@ Instalacion
 ---------------
 
 ```
-git clone https://github.com/juiko/comprobar-estudiante
-cd comprobar-estudiante/programa
+git clone https://github.com/juiko/libutem
+cd libutem
 python setup.py install --user
 
 ### Ahora deberias tener un ejecutable
