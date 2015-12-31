@@ -6,7 +6,7 @@ import requests
 
 import utem
 from utem.miutem import html
-from utem.errores import ErrorPeticion
+from utem.errores import ErrorPeticion, ErrorLogin
 from utem.utilidades import requiere_login
 
 class Cliente(utem.Cliente):
