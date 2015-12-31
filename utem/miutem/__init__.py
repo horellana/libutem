@@ -18,6 +18,9 @@ class Cliente(utem.Cliente):
             self.__peticion(url='http://mi.utem.cl/login',
                             url_destino='http://mi.utem.cl/inicio',
                             data={'rut_alumno': rut, 'contrasena': contrasena})
+            self.peticion(url='http://mi.utem.cl/login',
+                          url_destino='http://mi.utem.cl/inicio',
+                          data={'rut_alumno': rut, 'contrasena': contrasena})
             self.logueado = True
         except ErrorPeticion as err:
             raise ErrorLogin(err)

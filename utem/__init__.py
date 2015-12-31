@@ -19,7 +19,7 @@ class Cliente:
             'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'
         })
 
-    def __peticion(self, url, url_destino=None, data=None):
+    def peticion(self, url, url_destino=None, data=None):
         """
         Este metodo realiza una peticion HTTP (GET o POST segun corresponda).
         Tira un error si es que el servidor no retorna 200 o si no nos
