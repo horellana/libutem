@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>
+<html>
+  <head>
+    <title>Notas</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="StyleSheet" type="text/css" href="/css/unificado.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <link rel="StyleSheet" type="text/css" href="/css/standard.css">
+    <link rel="StyleSheet" type="text/css" href="/css/semantic.min.css">
+  </head>
+  <body>
+    <h3 class="ui header">
+      Notas
+      <div class="sub header">Segundo Semestre 2015</div>
+    </h3>
+    <table align="center" width="75%" class="pequena" cellpadding="2">
+      <tr class="titulo_fila">
+	<td width="45%">RUT</td>
+	<td>Nombre</td>
+      </tr>
+      <tr class="centro">
+	<td>11.111.111-0</td>
+	<td>JUAN PEREZ</td>
+      </tr>
+    </table>
+    <br />
+    <table width="80%" border="1" cellpadding="2" cellspacing="0" class="pequena" align="center">
+      <tr class="titulo_fila">
+	<th width="5%">Código Asignatura</th>
+	<th width="35%">Nombre Asignatura</th>
+	<th width="35%">Profesor</th>
+	<th width="10%">Secc.</th>
+	<th width="10%">Estado</th>
+	<th width="10%">Notas Final</th>
+	<th width="10%">Notas Parciales</th>
+      </tr>
+      <tr align="center">
+	<td>FISC8040</td>
+	<td align="left">ELECTROMAGNETISMO</td>
+	<td align="left">JUAN PEREZ</td>
+	<td>103</td>
+	<td>REPROBADO</td>
+	<td>1.0</td>
+	<td>
+	  <a href="/curricular/notas/119931" class="ui small icon orange button nueva" target="_blank" title="Ver parciales"><i class="search basic icon"></i></a>
+	</td>
+      </tr>
+      <tr align="center">
+	<td>HUMC8020</td>
+	<td align="left">INGLÉS I</td>
+	<td align="left">JUAN PEREZ</td>
+	<td>411</td>
+	<td>REPROBADO</td>
+	<td>2,0</td>
+	<td>
+	  <a href="/curricular/notas/120370" class="ui small icon orange button nueva" target="_blank" title="Ver parciales"><i class="search basic icon"></i></a>
+	</td>
+      </tr>
+      <tr align="center">
+	<td>INFB8062</td>
+	<td align="left">SISTEMAS DE INFORMACIÓN</td>
+	<td align="left">JUAN PEREZ</td>
+	<td>411</td>
+	<td>REPROBADO</td>
+	<td>3.0</td>
+	<td>
+	  <a href="/curricular/notas/120367" class="ui small icon orange button nueva" target="_blank" title="Ver parciales"><i class="search basic icon"></i></a>
+	</td>
+      </tr>
+      <tr align="center">
+	<td>INDC8060</td>
+	<td align="left">SISTEMAS ECONÓMICOS</td>
+	<td align="left">JUAN PEREZ</td>
+	<td>411</td>
+	<td>APROBADO</td>
+	<td>4.0</td>
+	<td>
+	  <a href="/curricular/notas/120362" class="ui small icon orange button nueva" target="_blank" title="Ver parciales"><i class="search basic icon"></i></a>
+	</td>
+      </tr>
+    </table>
+    <br />
+    <script>
+     $(function () {
+       $('a.nueva').on('click', function (ev) {
+	 ev.preventDefault();
+	 window.open($(this).attr('href'), 'pagina', 'toolbar=no,directories=no,menubar=yes,status=no,scrollbars=yes,resizable=yes,width=700,height=550');
+       });
+     });
+    </script></body>
+</html>
