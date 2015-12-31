@@ -17,12 +17,12 @@ def extraer_notas(html):
     """
     d = pq(html)
 
-    ramos = d('.col-xs-10')
-    nombres = d('div > h5 > span')
+    cantidad_ramos = len(d('.col-xs-10'))
+    texto_informacion_ramo = d('div > h5 > span')
     tabla_notas = d('#sample-table-1')
 
-    for i, _ in enumerate(ramos):
-        info = extraer_informacion_ramo(nombres[i].text)
+    for i in range(cantidad_ramos):
+        info = extraer_informacion_ramo(texto_informacion_ramo[i].text)
         nombre_ramo = info['nombre']
         codigo_ramo = info['codigo']
         seccion = info['seccion']
