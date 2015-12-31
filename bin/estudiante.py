@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
+import sys
 import json
 import argparse
-from sys import stderr, exit
 
 import utem.miutem as miutem
 import utem.dirdoc as dirdoc
@@ -13,12 +13,11 @@ def main(args):
         if args.rut:
             args.contraseña = args.rut
         else:
-            stderr.write('Necesito un rut y una contraseña\n')
+            print('Necesito un rut y una contraseña', file=sys.stderr)
             return -1
 
     if args.dirdoc:
         cliente = dirdoc.Cliente()
-
     else:
         cliente = miutem.Cliente()
 
@@ -53,4 +52,4 @@ def leer_argumentos():
 
 
 if __name__ == '__main__':
-    exit(main(leer_argumentos()))
+    sys.exit(main(leer_argumentos()))
