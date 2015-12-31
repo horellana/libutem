@@ -37,7 +37,7 @@ class Cliente:
 
         if not r.status_code == requests.codes.ok:
             r.raise_for_status()
-        elif not r.url == url_destino:
+        if not r.url == url_destino:
             raise errores.ErrorPeticion(url_destino, r.url, r.status_code)
-        else:
-            return r
+
+        return r
