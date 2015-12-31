@@ -15,9 +15,6 @@ class Cliente(utem.Cliente):
     """
     def login(self, rut, contrasena):
         try:
-            self.__peticion(url='http://mi.utem.cl/login',
-                            url_destino='http://mi.utem.cl/inicio',
-                            data={'rut_alumno': rut, 'contrasena': contrasena})
             self.peticion(url='http://mi.utem.cl/login',
                           url_destino='http://mi.utem.cl/inicio',
                           data={'rut_alumno': rut, 'contrasena': contrasena})
@@ -27,5 +24,5 @@ class Cliente(utem.Cliente):
 
     @requiere_login
     def notas(self):
-        respuesta = self.__peticion('http://mi.utem.cl/academia/mis_notas')
+        respuesta = self.peticion('http://mi.utem.cl/academia/mis_notas')
         return html.extraer_notas(respuesta.text)
