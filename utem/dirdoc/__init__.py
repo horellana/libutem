@@ -3,7 +3,6 @@ Modulo dirdoc
 """
 
 import utem
-import utem.dirdoc.html as html
 from utem.utilidades import requiere_login
 
 
