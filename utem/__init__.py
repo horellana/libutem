@@ -41,3 +41,12 @@ class Cliente:
             raise errores.ErrorPeticion(url_destino, r.url, r.status_code)
 
         return r
+
+    def login(self):
+        raise NotImplementedError()
+
+    def notas(self):
+        raise NotImplementedError()
+
+    def avance_malla(self):
+        raise NotImplementedError()
