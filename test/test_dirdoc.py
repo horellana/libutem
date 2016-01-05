@@ -4,7 +4,7 @@ import utem.dirdoc.html
 
 
 def test_extraer_tabla_notas():
-    with open('data/dirdoc_notas.html') as archivo:
+    with open('test/data/dirdoc_notas.html') as archivo:
         html = ''.join(archivo.readlines())
 
         esperado = [{'codigo': 'FISC8040',
