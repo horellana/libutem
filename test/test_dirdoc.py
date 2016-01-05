@@ -41,6 +41,7 @@ def test_extraer_tabla_notas():
 
         obtenido = utem.dirdoc.html.extraer_notas_parciales(html)
 
+        assert obtenido is not None
         assert len(esperado) == len(obtenido)
 
         for i, _ in enumerate(esperado):
