@@ -10,6 +10,8 @@ Requerimientos
 * [pyquery](https://github.com/gawel/pyquery)
 * [lxml](http://lxml.de/)
 
+Ademas, para ejecutar los tests se requiere [pytest](http://pytest.org/)
+
 Instalacion
 ---------------
 
