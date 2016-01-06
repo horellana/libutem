@@ -3,3 +3,5 @@ build/
 dist/
 env/
 /tests/.cache/v/cache/lastfailed
+*egg-info*
+.cache*
