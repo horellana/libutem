@@ -56,3 +56,19 @@ optional arguments:
 			Por defecto es la misma que el rut
   --notas
 ```
+
+Como ejecutar los tests
+-----------------------
+```
+$ py.test
+========================================== test session starts ==========================================
+platform linux -- Python 3.5.1, pytest-2.8.5, py-1.4.31, pluggy-0.3.1
+rootdir: /home/juiko/programming/python/libutem, inifile:
+collected 4 items
+
+test/test_dirdoc.py .
+test/test_miutem.py ...
+
+======================================= 4 passed in 0.71 seconds ========================================
+$
+```
