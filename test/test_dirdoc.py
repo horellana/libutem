@@ -12,34 +12,34 @@ def test_extraer_tabla_notas():
                      'profesor': 'JUAN PEREZ',
                      'seccion': '103',
                      'estado': 'REPROBADO',
-                     'promedio': '1.0',
-                     'link_notas_parciales': '119931'},
+                     'promedio': 1.0,
+                     'link_notas_parciales': '/curricular/notas/119931'},
 
                     {'codigo': 'HUMC8020',
                      'nombre': 'INGLÉS I',
                      'profesor': 'JUAN PEREZ',
                      'seccion': '411',
                      'estado': 'REPROBADO',
-                     'promedio': '2.0',
-                     'link_notas_parciales': '120370'},
+                     'promedio': 2.0,
+                     'link_notas_parciales': '/curricular/notas/120370'},
 
                     {'codigo': 'INFB8062',
-                     'nombre': 'JUAN PEREZ',
+                     'nombre': 'SISTEMAS DE INFORMACIÓN',
                      'profesor': 'JUAN PEREZ',
                      'seccion': '411',
-                     'estado': 'REPORBADO',
-                     'promedio': '3.0',
-                     'link_notas_parciales': '120367'},
+                     'estado': 'REPROBADO',
+                     'promedio': 3.0,
+                     'link_notas_parciales': '/curricular/notas/120367'},
 
                     {'codigo': 'INDC8060',
-                     'nombre': 'JUAN PEREZ',
+                     'nombre': 'SISTEMAS ECONÓMICOS',
                      'profesor': 'JUAN PEREZ',
                      'seccion': '411',
                      'estado': 'APROBADO',
-                     'promedio': '4.0',
-                     'link_notas_parciales': '120362'}]
+                     'promedio': 4.0,
+                     'link_notas_parciales': '/curricular/notas/120362'}]
 
-        obtenido = utem.dirdoc.html.extraer_notas_parciales(html)
+        obtenido = list(utem.dirdoc.html.extraer_tabla_notas(html))
 
         assert obtenido is not None
         assert len(esperado) == len(obtenido)
