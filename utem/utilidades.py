@@ -17,10 +17,11 @@ def requiere_login(metodo):
         return metodo(*args, **kwargs)
     return f
 
+
 def arreglar_flotante(texto_numero):
     """
     Recibe un string que representa a un numero decimal,
     con una coma (por ejemplo '5,3') y lo arregla para que
-    la funcion `float` lo reconosca (por ejemple lo transforma a '5.3')
+    la funcion `float` lo reconozca (por ejemple lo transforma a '5.3')
     """
     return re.sub(r',', r'.', texto_numero)
